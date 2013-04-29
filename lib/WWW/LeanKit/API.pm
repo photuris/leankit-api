@@ -9,13 +9,54 @@ use Carp qw( croak );
 
 our $VERSION = qv( '0.0.1' );
 
+=head1 NAME
+
+WWW::LeanKit::API - Access LeanKit's REST API with Perl
+
+=cut
+
 our @namespaces = (
 	'Archive', 'Backlog', 'Board', 'Card', 'Config'
 );
 
-=head1 NAME
+# Load up namespaces
+for (@namespaces) {
+	my $package = __PACKAGE__ . "::$_";
+	my $name    = "\L$_";
 
-WWW::LeanKit::API - Access LeanKit's REST API with Perl
+	# no critic
+	my $namespace = eval qq(
+		use $package;
+
+		sub $name {
+			my \$self = shift;
+
+			unless ( \$self->{_$name} ) {
+				\$self->{_$name} = $package->new( base => \$self );
+			}
+
+			return \$self->{_$name};
+		}
+
+		package $package;
+
+		sub base { return shift->{base}; };
+
+		sub new {
+			my ( \$class, \%args ) = \@_;
+			my \$self = bless \\\%args, \$class;
+
+			\$self->\$_ for keys %{\$self};
+
+			return \$self;
+		};
+
+		1;
+	);
+
+	croak "Cannot create namespace $name: $@\n"
+		if not $namespace;
+}
 
 =head1 METHODS
 
@@ -58,6 +99,22 @@ returns: scalar {String} The API version
 sub _api_version {
 	return qv( '1.0' );
 }
+
+=item B<_authenticate()>
+
+Authenticate against LeanKit API.
+
+returns: scalar {Boolean}
+
+=cut
+
+# sub _authenticate {
+# 	my $self = shift;
+
+# 	return 1;
+
+# 	return 0;
+# }
 
 =back
 
