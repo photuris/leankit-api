@@ -54,10 +54,49 @@ returns: ref {Hash} The board identifiers
 =cut
 
 sub get_identifiers {
-	my $self   = shift;
+	my $self = shift;
 	my ( $id ) = @_;
 
 	return $self->base->request->get("Board/$id/GetBoardIdentifiers");
+}
+
+=item B<get_newer_if_exists()>
+
+Get a newer version of the Board if a newer version
+exists.
+
+param: scalar {Integer} Board ID
+
+param: scalar {Integer} Version ID
+
+returns: ref {Hash} The board
+
+=cut
+
+sub get_newer_if_exists {
+	my $self = shift;
+	my ( $id, $version ) = @_;
+
+	return $self->base->request->get("Board/$id/BoardVersion/$version/GetNewerIfExists");
+}
+
+=item B<get_board_history_since()>
+
+Get the board history since the specified version.
+
+param: scalar {Integer} Board ID
+
+param: scalar {Integer} Version ID
+
+returns: ref {Array} The board history
+
+=cut
+
+sub get_board_history_since {
+	my $self = shift;
+	my ( $id, $version ) = @_;
+
+	return $self->base->request->get("Board/$id/BoardVersion/$version/GetBoardHistorySince");
 }
 
 =back
