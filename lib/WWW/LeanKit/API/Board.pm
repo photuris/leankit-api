@@ -37,7 +37,7 @@ returns: ref {Hash} The board
 =cut
 
 sub find {
-	my $self   = shift;
+	my $self = shift;
 	my ( $id ) = @_;
 
 	return $self->base->request->get("Boards/$id");
