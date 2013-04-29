@@ -17,7 +17,7 @@ WWW::LeanKit::API - Access LeanKit's REST API with Perl
 =cut
 
 our @namespaces = (
-	'Archive', 'Backlog', 'Board', 'Card', 'Config'
+	'Archive', 'Backlog', 'Board', 'Card', 'Request'
 );
 
 # Load up namespaces

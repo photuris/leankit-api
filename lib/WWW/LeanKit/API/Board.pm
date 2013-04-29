@@ -23,16 +23,7 @@ returns: ref {Array} List of boards
 sub all {
 	my $self = shift;
 
-	my $request = HTTP::Request->new( GET => $self->base->{base_url} . 'Boards/' );
-	   $request->authorization_basic( $self->base->{username}, $self->base->{password} );
-
-	my $response = $self->base->{ua}->request($request);
-
-	if ($response->code == 200) {
-		my $json = JSON::Any->new;
-
-		return $json->decode($response->content)->{ReplyData}[0];
-	}
+	return $self->base->request->get('Boards/');
 }
 
 =item B<find()>
@@ -49,16 +40,7 @@ sub find {
 	my $self   = shift;
 	my ( $id ) = @_;
 
-	my $request = HTTP::Request->new( GET => $self->base->{base_url} . 'Boards/' . $id . '/' );
-	   $request->authorization_basic( $self->base->{username}, $self->base->{password} );
-
-	my $response = $self->base->{ua}->request($request);
-
-	if ($response->code == 200) {
-		my $json = JSON::Any->new;
-
-		return $json->decode($response->content)->{ReplyData}[0];
-	}
+	return $self->base->request->get("Boards/$id/");
 }
 
 =back
