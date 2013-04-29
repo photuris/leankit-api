@@ -35,6 +35,32 @@ sub all {
 	}
 }
 
+=item B<find()>
+
+Find a board by specified Board ID.
+
+param: scalar {Integer} Board ID
+
+returns: ref {Hash} The board
+
+=cut
+
+sub find {
+	my $self   = shift;
+	my ( $id ) = @_;
+
+	my $request = HTTP::Request->new( GET => $self->base->{base_url} . 'Boards/' . $id . '/' );
+	   $request->authorization_basic( $self->base->{username}, $self->base->{password} );
+
+	my $response = $self->base->{ua}->request($request);
+
+	if ($response->code == 200) {
+		my $json = JSON::Any->new;
+
+		return $json->decode($response->content)->{ReplyData}[0];
+	}
+}
+
 =back
 
 =cut
