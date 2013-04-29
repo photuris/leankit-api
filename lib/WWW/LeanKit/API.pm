@@ -80,7 +80,6 @@ sub new {
 
 	bless ( $self, $class );
 
-	$self->{api_version} = $args{api_version} || $self->_api_version();
 	$self->{username}    = $args{username}    || '';
 	$self->{password}    = $args{password}    || '';
 	$self->{account}     = $args{account}     || '';
