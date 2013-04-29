@@ -24,7 +24,7 @@ returns: ref {Hash} The archive
 
 sub fetch {
 	my $self = shift;
-	my ( $board_id, $card_id ) = @_;
+	my ( $board_id ) = @_;
 
 	return $self->base->request->get("/Board/$board_id/Archive");
 }
