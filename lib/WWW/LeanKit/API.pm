@@ -5,6 +5,7 @@ use strict;
 use version;
 use JSON::Any;
 use LWP::UserAgent;
+use LWP::Protocol::https;
 use Carp qw( croak );
 
 our $VERSION = qv( '0.0.1' );
@@ -83,38 +84,14 @@ sub new {
 	$self->{username}    = $args{username}    || '';
 	$self->{password}    = $args{password}    || '';
 	$self->{account}     = $args{account}     || '';
-	$self->{base_url}    = "http://$self->{account}.leankitkanban.com/Kanban/Api/";
+	$self->{base_url}    = "https://$self->{account}.leankitkanban.com/Kanban/Api/";
+
+	$self->{ua} ||= LWP::UserAgent->new(
+		agent => 'perl-WWW-LeanKit-API/$VERSION'
+	);
 
 	return $self;
 }
-
-=item B<_api_version()>
-
-Returns the working API version.
-
-returns: scalar {String} The API version
-
-=cut
-
-sub _api_version {
-	return qv( '1.0' );
-}
-
-=item B<_authenticate()>
-
-Authenticate against LeanKit API.
-
-returns: scalar {Boolean}
-
-=cut
-
-# sub _authenticate {
-# 	my $self = shift;
-
-# 	return 1;
-
-# 	return 0;
-# }
 
 =back
 
