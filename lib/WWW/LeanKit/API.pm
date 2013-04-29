@@ -8,7 +8,7 @@ use LWP::UserAgent;
 use LWP::Protocol::https;
 use Carp qw( croak );
 
-our $VERSION = qv( '0.0.1' );
+our $VERSION = qv( '1.0.0' );
 
 =head1 NAME
 
