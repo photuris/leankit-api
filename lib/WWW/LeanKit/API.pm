@@ -80,10 +80,10 @@ sub new {
 
 	bless ( $self, $class );
 
-	$self->{username}    = $args{username}    || '';
-	$self->{password}    = $args{password}    || '';
-	$self->{account}     = $args{account}     || '';
-	$self->{base_url}    = "https://$self->{account}.leankitkanban.com/Kanban/Api/";
+	$self->{username} = $args{username}    || '';
+	$self->{password} = $args{password}    || '';
+	$self->{account}  = $args{account}     || '';
+	$self->{base_url} = "https://$self->{account}.leankitkanban.com/Kanban/Api/";
 
 	$self->{ua} ||= LWP::UserAgent->new(
 		agent => 'perl-WWW-LeanKit-API/$VERSION'
