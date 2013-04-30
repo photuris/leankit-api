@@ -116,9 +116,7 @@ sub move {
 	my $self = shift;
 	my ( $board_id, $card_id, $lane_id, $position ) = @_;
 
-	$position = 0 unless $position ne '' && $position != undef;
-
-	return $self->base->request->get(
+	return $self->base->request->post(
 		"/Board/$board_id/MoveCard/$card_id/Lane/$lane_id/Position/$position"
 	);
 }

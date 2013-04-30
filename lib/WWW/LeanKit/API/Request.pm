@@ -54,7 +54,8 @@ sub post {
 	my ( $call, $data ) = @_;
 
 	my $json = JSON::Any->new;
-	my $encoded_data = $json->encode($data);
+
+	my $encoded_data = ($data) ? $json->encode($data) : '{}';
 
 	my $request = HTTP::Request->new( POST => $self->base->{base_url} . $call );
 	   $request->authorization_basic( $self->base->{username}, $self->base->{password} );
