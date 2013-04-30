@@ -16,7 +16,9 @@ WWW::LeanKit::API::Request
 
 Issues GET query against LeanKit API.
 
-returns: ref JSON-decoded API response
+param: scalar {String} URL to call
+
+returns: scalar {String} JSON-decoded API response
 
 =cut
 
@@ -44,7 +46,7 @@ param: scalar {String} URL to call
 
 param: ref {Hash} Properties to POST
 
-returns: ref JSON-decoded API response
+returns: scalar {String} JSON-decoded API response
 
 =cut
 
