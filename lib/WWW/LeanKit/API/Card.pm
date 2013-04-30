@@ -66,7 +66,30 @@ sub find_by_external_id {
 	my $self = shift;
 	my ( $board_id, $external_id ) = @_;
 
-	return $self->base->request->get("/Board/$board_id/GetCardByExternalId/$external_id");
+	return $self->base->request->get("/Board/$board_id/GetCardByExternalId/$external_id")->[0];
+}
+
+=item B<update()>
+
+Updates a card by specified Board ID and External ID.
+
+param: scalar {Integer} Board ID
+
+param: scalar {Integer} Card ID
+
+param: ref {Hash} Card properties
+
+returns: ref {Hash} The card
+
+=cut
+
+sub update {
+	my $self = shift;
+	my ( $board_id, $card_id, $properties ) = @_;
+
+	$properties->{Id} = $card_id;
+
+	return $self->base->request->post("/Board/$board_id/UpdateCard", $properties);
 }
 
 =back
