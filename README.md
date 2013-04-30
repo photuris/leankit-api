@@ -17,7 +17,7 @@ Perl wrapper for LeanKit Kanban API
     my $board = $api->board->find(1111);
 
     # Fetch Card details
-    my $card = $api->card->find(2222);
+    my $card = $api->card->find(1111, 2222);
 
     print $card->{Title} . "\n";
 
