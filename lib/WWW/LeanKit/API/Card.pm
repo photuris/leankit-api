@@ -88,12 +88,12 @@ sub update {
 
 	# Override existing properties with new ones, leaving
 	# non-specified properties in-tact
-	my %parameters = (
+	my %saved_properties = (
 		%{$card},
 		%{$properties}
 	);
 
-	return $self->base->request->post("/Board/$board_id/UpdateCard", \%parameters);
+	return $self->base->request->post("/Board/$board_id/UpdateCard", \%saved_properties);
 }
 
 =back
