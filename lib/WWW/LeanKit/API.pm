@@ -25,7 +25,7 @@ for (@namespaces) {
 	my $package = __PACKAGE__ . "::$_";
 	my $name    = "\L$_";
 
-	# no critic
+	## no critic
 	my $namespace = eval qq(
 		use $package;
 
@@ -80,13 +80,14 @@ sub new {
 
 	bless ( $self, $class );
 
-	$self->{username} = $args{username}    || '';
-	$self->{password} = $args{password}    || '';
-	$self->{account}  = $args{account}     || '';
+	$self->{username} ||= '';
+	$self->{password} ||= '';
+	$self->{account}  ||= '';
+
 	$self->{base_url} = "https://$self->{account}.leankitkanban.com/Kanban/Api/";
 
 	$self->{ua} ||= LWP::UserAgent->new(
-		agent => 'perl-WWW-LeanKit-API/$VERSION'
+		agent => "perl-WWW-LeanKit-API/$VERSION"
 	);
 
 	return $self;
