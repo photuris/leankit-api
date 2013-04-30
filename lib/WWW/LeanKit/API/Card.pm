@@ -2,7 +2,6 @@ package WWW::LeanKit::API::Card;
 
 use warnings;
 use strict;
-use Carp;
 
 =head1 NAME
 
@@ -75,9 +74,9 @@ Updates a card by specified Board ID and External ID.
 
 param: scalar {Integer} Board ID
 
-param: scalar {Integer} Card ID
+param: ref {Hash} The existing card
 
-param: ref {Hash} Card properties
+param: ref {Hash} Card properties to update
 
 returns: ref {Hash} The card
 
@@ -85,11 +84,16 @@ returns: ref {Hash} The card
 
 sub update {
 	my $self = shift;
-	my ( $board_id, $card_id, $properties ) = @_;
+	my ( $board_id, $card, $properties ) = @_;
 
-	$properties->{Id} = $card_id;
+	# Override existing properties with new ones, leaving
+	# non-specified properties in-tact
+	my %parameters = (
+		%{$card},
+		%{$properties}
+	);
 
-	return $self->base->request->post("/Board/$board_id/UpdateCard", $properties);
+	return $self->base->request->post("/Board/$board_id/UpdateCard", \%parameters);
 }
 
 =back

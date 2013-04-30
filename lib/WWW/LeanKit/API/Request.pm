@@ -2,7 +2,6 @@ package WWW::LeanKit::API::Request;
 
 use warnings;
 use strict;
-use Carp;
 
 =head1 NAME
 
