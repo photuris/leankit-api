@@ -146,6 +146,25 @@ sub move {
 	);
 }
 
+=item B<get_comments()>
+
+Fetch comments by specified Board ID and Card ID.
+
+param: scalar {Integer} Board ID
+
+param: scalar {Integer} Card ID
+
+returns: ref {Array} The comments
+
+=cut
+
+sub get_comments {
+	my $self = shift;
+	my ( $board_id, $card_id ) = @_;
+
+	return $self->base->request->get("/Card/GetComments/$board_id/$card_id");
+}
+
 =item B<add_comment()>
 
 Adds a comment to the specified Card.
