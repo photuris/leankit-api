@@ -96,6 +96,31 @@ sub update {
 	return $self->base->request->post("/Board/$board_id/UpdateCard", \%saved_properties);
 }
 
+=item B<create()>
+
+Creates a new card using specified properties.
+
+param: scalar {Integer} Board ID
+
+param: scalar {Integer} Lane ID
+
+param: scalar {Integer} Lane position
+
+param: ref {Hash} Card properties to insert
+
+returns: ref {Hash} The new card
+
+=cut
+
+sub create {
+	my $self = shift;
+	my ( $board_id, $lane_id, $position, $properties ) = @_;
+
+	return $self->base->request->post(
+		"/Board/$board_id/AddCard/Lane/$lane_id/Position/$position", $properties
+	);
+}
+
 =item B<move()>
 
 Moves a card to the specified Board and Lane.
