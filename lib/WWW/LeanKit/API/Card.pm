@@ -146,6 +146,33 @@ sub move {
 	);
 }
 
+=item B<add_comment()>
+
+Adds a comment to the specified Card.
+
+param: scalar {Integer} Board ID
+
+param: scalar {Integer} Card ID
+
+param: scalar {String} The comment
+
+returns: ref {Hash} The response (the comment number)
+
+=cut
+
+sub add_comment {
+	my $self = shift;
+	my ( $board_id, $card_id, $comment ) = @_;
+
+	my $comment_property = {
+		Text => $comment
+	};
+
+	return $self->base->request->post(
+		"/Card/SaveComment/$board_id/$card_id", $comment_property
+	);
+}
+
 =back
 
 =cut
