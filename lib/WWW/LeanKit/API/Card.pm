@@ -46,7 +46,7 @@ sub delete {
 	my $self = shift;
 	my ( $board_id, $card_id ) = @_;
 
-	return $self->base->request->get("/Board/$board_id/DeleteCard/$card_id");
+	return $self->base->request->post("/Board/$board_id/DeleteCard/$card_id");
 }
 
 =item B<find_by_external_id()>
